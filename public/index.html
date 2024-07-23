@@ -1,12 +1,73 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Delete TikTok</title>
-</head>
-<body>
-  
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Delete TikTok</title>
+    <script src="/socket.io/socket.io.js"></script>
+  </head>
+  <body>
+    <script>
+      const socket = io();
+      socket.on("connection", (socket) => {
+        console.log("A user connected");
+
+        // Send initial earth data (population) to the connected client
+
+        // You can also emit updates to specific client events as needed
+        // For example, if a person's status changes:
+        // socket.emit('personStatusUpdate', { id: person.id, newStatus: person.infection_status });
+      });
+
+      socket.on("earthData", (earthData) => {
+        document.querySelector("body").innerHTML += earthData;
+      });
+    </script>
+  </body>
 </html>
+
+<style>
+  body {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  * {
+    font-family: "Poppins", sans-serif;
+    box-sizing: border-box;
+  }
+  .person {
+    width: 200px;
+    height: 350px;
+    padding: 10px;
+    margin: 10px;
+    border: solid 1px lightgray;
+  }
+
+  .pfparea {
+    width: 180px;
+    height: 180px;
+    border: solid 1px red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .pfp {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    background-image: url(https://braverplayers.org/wp-content/uploads/2022/09/blank-pfp.png);
+  }
+
+  p {
+    font-size: 14px;
+  }
+
+  .bold {
+    font-weight: bold;
+  }
+</style>
